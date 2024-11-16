@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Run') {
             steps {
-                echo 'Ini stage Run)
+                echo 'Ini stage Run'
             }
         }
         stage('Deploy') {
