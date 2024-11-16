@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
+                echo 'Checkout from Repository Git'
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'git@github.com:sandi393/technical-test.git']])
             }
         }
