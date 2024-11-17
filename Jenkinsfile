@@ -8,7 +8,7 @@ pipeline {
         IMAGE_REPO_NAME="belajar/sandi-aws"
         IMAGE_TAG="v1"
         REPOSITORY_URI = "390403878874.dkr.ecr.ap-southeast-1.amazonaws.com/belajar/sandi-aws"
-        KUBECONFIG = "/var/lib/jenkins/.kube/config" //locate in jenkins EC2 serevr
+        KUBECONFIG = "/Users/sandilesmana/.kube/config" //locate in jenkins EC2 serevr
     }
 
     stages {
