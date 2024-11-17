@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: DemoApp
+  template:
+    metadata:
+      labels:
+        app: DemoApp
+    spec:
+      containers:
+        - name: demo-app-container
+          image: <ECR-REPO-LINK>:${IMAGE_TAG}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
