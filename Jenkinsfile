@@ -66,5 +66,18 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            echo 'Cleaning up...'
+            sh """rm -f tmp/*.dmx"""
+    junit(testResults: 'target/surefire-reports/*.xml', allowEmptyResults: true)
+        }
+        success {
+            echo 'Build succeeded!'
+        }
+        failure {
+            echo 'Build failed!'
+        }
+    }
 }
 
