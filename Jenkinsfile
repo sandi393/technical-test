@@ -56,7 +56,7 @@ pipeline {
                         def imageTag = env.GIT_COMMIT
                         
                         // Replace the placeholder ${IMAGE_TAG} in deployment.yaml with the actual image tag
-                        sh """sed -i 's|\${IMAGE_TAG}|${imageTag}|' deployment.yaml"""
+                        sh """sed -i '' 's|\${IMAGE_TAG}|${imageTag}|' deployment.yaml"""
                         
                         // Apply deployment.yaml to the EKS cluster
                         sh """kubectl apply -f deployment.yaml"""
