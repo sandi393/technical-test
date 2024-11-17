@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: demo-app-container
-          image: <ECR-REPO-LINK>:${IMAGE_TAG}
+          image: 390403878874.dkr.ecr.ap-southeast-1.amazonaws.com/belajar/sandi-aws:v1:${IMAGE_TAG}
           imagePullPolicy: Always
           ports:
             - containerPort: 80
