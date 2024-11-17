@@ -8,6 +8,7 @@ pipeline {
         IMAGE_REPO_NAME="belajar/sandi-aws"
         IMAGE_TAG="v1"
         REPOSITORY_URI = "390403878874.dkr.ecr.ap-southeast-1.amazonaws.com/belajar/sandi-aws"
+        KUBECONFIG = "/var/lib/jenkins/.kube/config" //locate in jenkins EC2 serevr
     }
 
     stages {
@@ -48,7 +49,20 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Ini adalah stage Deploy'
+                script {
+                    // Set KUBECONFIG environment variable
+                    withEnv(["KUBECONFIG=${KUBECONFIG}"]) {
+                        // Get the latest image tag from the GIT_COMMIT environment variable
+                        def imageTag = env.GIT_COMMIT
+                        
+                        // Replace the placeholder ${IMAGE_TAG} in deployment.yaml with the actual image tag
+                        sh "sed -i 's|\${IMAGE_TAG}|${imageTag}|' deployment.yaml"
+                        
+                        // Apply deployment.yaml to the EKS cluster
+                        sh "kubectl apply -f deployment.yaml"
+                        sh "kubectl apply -f service.yaml"
+                    }
+                }
             }
         }
     }
